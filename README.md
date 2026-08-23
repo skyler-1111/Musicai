@@ -40,15 +40,15 @@ There are currently eight notes:
 
 ## How it works
 
-The webcam feed is captured using OpenCV and passed into MediaPipe's hand-tracking model.
+- The webcam feed is captured using OpenCV and passed into MediaPipe's hand-tracking model.
 
-MediaPipe gives the program the positions of the hand landmarks. The program then compares the distances between landmarks to figure out which gesture is being made.
+- MediaPipe gives the program the positions of the hand landmarks. The program then compares the distances between landmarks to figure out which gesture is being made.
 
-For example, a fist is detected by comparing the fingertip positions with their corresponding joints. An extended index finger is detected separately so it can be used to select piano notes.
+- For example, a fist is detected by comparing the fingertip positions with their corresponding joints. An extended index finger is detected separately so it can be used to select piano notes.
 
-The program also keeps track of when each sound was triggered.
+- The program also keeps track of when each sound was triggered.
 
-Instead of recording the actual audio, it stores events like:
+- Instead of recording the actual audio, it stores events like:
 (time, sound_type, note)
 
 For example:
@@ -57,7 +57,7 @@ For example:
 (1.10, "beat", None)
 (1.48, "hihat", None)
 
-When playback starts, the program checks the elapsed time and plays each recorded event at approximately the same point in the sequence.
+- When playback starts, the program checks the elapsed time and plays each recorded event at approximately the same point in the sequence.
 --------------------------------------
 **Controls**
 -Q — Quit the program
@@ -72,22 +72,17 @@ You'll need Python (3.12 preferably since mediapipe doesn't have a 3.13 or 3.14 
 
 The project also needs the audio files used by the program.
 Create a sounds folder next to the Python file:
-
-Hand-Gesture-Music-Maker/
-│
-├── main.py
-├── README.md
-└── sounds/
-    ├── C4.mp3
-    ├── D4.mp3
-    ├── E4.mp3
-    ├── F4.mp3
-    ├── G4.mp3
-    ├── A4.mp3
-    ├── B4.mp3
-    ├── C5.mp3
-    ├── beat.mp3
-    └── hihat.mp3
+<br> sounds/
+<br>    ├── C4.mp3
+<br>    ├── D4.mp3
+<br>    ├── E4.mp3
+<br>    ├── F4.mp3
+<br>    ├── G4.mp3
+<br>    ├── A4.mp3
+<br>    ├── B4.mp3
+<br>    ├── C5.mp3
+<br>    ├── beat.mp3
+<br>    └── hihat.mp3
 
 The program expects those filenames exactly.
 

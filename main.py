@@ -3,6 +3,7 @@ import mediapipe as mp
 import pygame
 import time
 import math
+import sys
 from pathlib import Path
 
 pygame.mixer.pre_init(44100, -16, 2, 512)
@@ -10,7 +11,10 @@ pygame.init()
 pygame.mixer.init()
 
 NOTE_NAMES = ["C4", "D4", "E4", "F4", "G4", "A4", "B4", "C5"]
-SOUND_FOLDER = Path(__file__).parent / "sounds"
+if getattr(sys, "frozen", False):
+    SOUND_FOLDER = Path(sys._MEIPASS) / "sounds"
+else:
+    SOUND_FOLDER = Path(__file__).parent / "sounds"
 
 def load_sound(filename):
     """Load a user-provided MP3 and fail with a useful setup message."""

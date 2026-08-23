@@ -1,6 +1,6 @@
-#Musicai
+**Musicai**
 -------
-**Hand Gesture Music Maker**
+Hand Gesture Music Maker
 ---------------------------------------
 
 A Python project that turns hand gestures into music.

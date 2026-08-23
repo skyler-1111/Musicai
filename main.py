@@ -17,7 +17,6 @@ else:
     SOUND_FOLDER = Path(__file__).parent / "sounds"
 
 def load_sound(filename):
-    """Load a user-provided MP3 and fail with a useful setup message."""
     path = SOUND_FOLDER / filename
     if not path.exists():
         raise FileNotFoundError(f"Missing audio file: {path}")
@@ -29,11 +28,9 @@ SOUND_BEAT = load_sound("beat.mp3")
 SOUND_HIHAT = load_sound("hihat.mp3")
 
 def dist(p1, p2):
-    """Euclidean distance between two landmarks (normalized coordinates)."""
     return math.hypot(p1.x - p2.x, p1.y - p2.y)
 
 def is_fist(hand_landmarks):
-    """Detects if a hand is forming a fist."""
     wrist = hand_landmarks.landmark[0]
     tips = [8, 12, 16, 20] # index, middle, ring, pinky tips
     mcp_joints = [5, 9, 13, 17]
@@ -45,7 +42,6 @@ def is_fist(hand_landmarks):
     return closed_count == len(tips)
 
 def is_index_pointing(hand_landmarks):
-    """Detect an extended index finger with the other fingers closed."""
     wrist = hand_landmarks.landmark[0]
     index_is_extended = dist(hand_landmarks.landmark[8], wrist) > dist(hand_landmarks.landmark[5], wrist)
     other_fingers_closed = all(
@@ -55,7 +51,6 @@ def is_index_pointing(hand_landmarks):
     return index_is_extended and other_fingers_closed
 
 def is_open_palm(hand_landmarks):
-    """Detect an open palm by checking that all fingertips are extended."""
     wrist = hand_landmarks.landmark[0]
     tips = [4, 8, 12, 16, 20]
     mcp_joints = [2, 5, 9, 13, 17]
@@ -66,10 +61,6 @@ def is_open_palm(hand_landmarks):
     )
 
 def is_triangle_gesture(hand1, hand2):
-    """Detects two hands forming a triangle (illuminati/play gesture).
-       - Index tips (8) close together at top
-       - Thumb tips (4) close together at bottom
-    """
     h1_index = hand1.landmark[8]
     h2_index = hand2.landmark[8]
     h1_thumb = hand1.landmark[4]
@@ -101,7 +92,7 @@ def main():
     cap.set(cv2.CAP_PROP_FRAME_WIDTH, 1280)
     cap.set(cv2.CAP_PROP_FRAME_HEIGHT, 720)
     
-    cv2.namedWindow("Hand Gesture Music Maker", cv2.WINDOW_NORMAL)
+    cv2.namedWindow("Musicai", cv2.WINDOW_NORMAL)
     
     mp_hands = mp.solutions.hands
     hands = mp_hands.Hands(
